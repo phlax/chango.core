@@ -1,0 +1,37 @@
+# https://travis-ci.org/#!/phlax/dj-channels
+language: python
+python:
+  - "3.6"
+cache:
+  directories:
+    - $HOME/virtualenv/python3.6.7/lib
+    - $HOME/virtualenv/python3.6.7/bin
+    - node_modules
+    - $HOME/.nvm
+
+install:
+  - pip install -U setuptools pip pytest
+  - pip install -e .
+  - pip install .[test]
+  - nvm use 11.0.0
+  - npm install .
+
+script:
+  - nvm use 11.0.0
+  - npm run test
+  - npm run lint
+  - py.test -vv --cov-append
+
+after_success:
+  - codecov
+
+before_deploy:
+  - npm run build
+
+deploy:
+  provider: npm
+  edge: true
+  api_token: $NPM_API_TOKEN
+  email: ryan@synca.io
+  on:
+    tags: true
