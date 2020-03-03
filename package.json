@@ -1,0 +1,93 @@
+{
+    "license": "GPL-3.0",
+    "name": "@chango/core",
+    "version": "0.0.4",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/phlax/chango.core"
+    },
+    "scripts": {
+        "start": "npm run build -- -w",
+        "build": "cross-env NODE_ENV=production babel . -d lib --ignore babel.config.js --ignore tests --ignore .git --ignore node_modules --ignore lib --ignore coverage",
+        "test": "jest --coverage",
+        "lint": "eslint . --ignore-pattern '**/lib/**/*.js'"
+    },
+    "jest": {
+        "verbose": true,
+        "testMatch": [
+            "**/tests/js/**/*.js"
+        ],
+        "collectCoverageFrom": [
+            "**/*.{js,jsx,ts,tsx}",
+            "!**/babel.config.js",
+            "!**/lib/**/*",
+            "!**/coverage/**/*",
+            "**/tests/**/*.{js,jsx,ts,tsx}",
+            "!src/**/*.d.ts"
+        ],
+        "coverageDirectory": "./coverage/",
+        "collectCoverage": true,
+        "coverageReporters": [
+            "text",
+            "text-summary",
+            "lcov"
+        ],
+        "forceCoverageMatch": [
+            "**/tests/**/*.{js,jsx,ts,tsx}"
+        ],
+        "moduleNameMapper": {
+            "@chango/core(.*)": "<rootDir>$1"
+        },
+        "moduleDirectories": [
+            "node_modules",
+            ".",
+            "!**/lib/**/*"
+        ],
+        "transform": {
+            "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
+        },
+        "transformIgnorePatterns": [
+            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+            "^.+\\.module\\.(css|sass|scss)$"
+        ],
+        "moduleFileExtensions": [
+            "js",
+            "jsx",
+            "css"
+        ]
+    },
+    "files": [
+        "lib/**/*"
+    ],
+    "main": "lib/index.js",
+    "peerDependencies": {
+        "history": "^4.10.1",
+        "js-cookie": "^2.2.1",
+        "redux": "^4.0.5"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.0",
+        "babel-eslint": "^10.1.0",
+        "babel-jest": "^25.2.4",
+        "babel-plugin-rewire": "^1.2.0",
+        "cross-env": "^7.0.2",
+        "eslint": "^6.6.0",
+        "eslint-loader": "3.0.3",
+        "eslint-plugin-babel": "^5.3.0",
+        "eslint-plugin-class-property": "^1.1.0",
+        "eslint-plugin-flowtype": "4.6.0",
+        "eslint-plugin-import": "2.20.0",
+        "eslint-plugin-jest": "^23.8.2",
+        "eslint-plugin-jsx-a11y": "6.2.3",
+        "history": "^4.10.1",
+        "jest": "^25.2.4",
+        "js-cookie": "^2.2.1",
+        "prop-types-exact": "^1.2.0",
+        "redux": "^4.0.5"
+    }
+}
