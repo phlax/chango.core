@@ -215,9 +215,9 @@ def test_view_js_to_string(m_js, m_prefix, m_dump):
         == [[(), {}]])
     assert (
         result
-        == ("window.PREFIX = {}\n"
+        == ("<script>window.PREFIX = {}\n"
             "window.PREFIX.js1 = JSON.parse(\"DUMPED JS\");\n"
-            "window.PREFIX.js2 = JSON.parse(\"DUMPED JS\");"))
+            "window.PREFIX.js2 = JSON.parse(\"DUMPED JS\");</script>"))
 
 
 def test_view_get_page_data():
