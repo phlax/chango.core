@@ -1,2 +1,2 @@
 
-default_app_config = 'dj.channels.core.apps.DjChannelsConfig'
+default_app_config = 'chango.core.apps.ChangoConfig'
