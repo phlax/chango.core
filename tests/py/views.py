@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock, PropertyMock
 
 import pytest
 
-from dj.channels.core.views import ChannelView
+from chango.core.views import ChannelView
 
 
 def test_view_constructor():
@@ -41,17 +41,17 @@ def test_view_use_l10n(settings):
     assert view.use_l10n is False
 
 
-@patch("dj.channels.core.views.mark_safe")
+@patch("chango.core.views.mark_safe")
 @patch(
-    "dj.channels.core.views.ChannelView.accept_lang",
+    "chango.core.views.ChannelView.accept_lang",
     new_callable=PropertyMock)
 @patch(
-    "dj.channels.core.views.ChannelView.language_direction",
+    "chango.core.views.ChannelView.language_direction",
     new_callable=PropertyMock)
 @patch(
-    "dj.channels.core.views.ChannelView.title",
+    "chango.core.views.ChannelView.title",
     new_callable=PropertyMock)
-@patch("dj.channels.core.views.ChannelView.js_to_string")
+@patch("chango.core.views.ChannelView.js_to_string")
 def test_view_get_context_data(m_js, m_title, m_dir, m_lang, m_safe):
     view = ChannelView(data="DATA VIEW")
     m_js.return_value = "JS"
@@ -84,9 +84,9 @@ def test_view_get_context_data(m_js, m_title, m_dir, m_lang, m_safe):
             'js': 'SAFE JS, WE HOPE'})
 
 
-@patch("dj.channels.core.views.ChannelView.get_page_data")
-@patch("dj.channels.core.views.ChannelView.title", new_callable=PropertyMock)
-@patch("dj.channels.core.views.ChannelView.get_settings")
+@patch("chango.core.views.ChannelView.get_page_data")
+@patch("chango.core.views.ChannelView.title", new_callable=PropertyMock)
+@patch("chango.core.views.ChannelView.get_settings")
 def test_view_get_js(m_settings, m_title, m_data):
     view = ChannelView(data="DATA VIEW")
     type(view).request = PropertyMock()
@@ -123,16 +123,16 @@ def test_view_get_js(m_settings, m_title, m_data):
 
 
 @patch(
-    "dj.channels.core.views.ChannelView.use_l10n",
+    "chango.core.views.ChannelView.use_l10n",
     new_callable=PropertyMock)
 @patch(
-    "dj.channels.core.views.ChannelView.socket_address",
+    "chango.core.views.ChannelView.socket_address",
     new_callable=PropertyMock)
 @patch(
-    "dj.channels.core.views.ChannelView.reconnection_policy",
+    "chango.core.views.ChannelView.reconnection_policy",
     new_callable=PropertyMock)
 @patch(
-    "dj.channels.core.views.ChannelView.auth_settings",
+    "chango.core.views.ChannelView.auth_settings",
     new_callable=PropertyMock)
 def test_view_get_settings(m_auth, m_connect, m_address, m_l10n):
     view = ChannelView(data="DATA VIEW")
@@ -187,11 +187,11 @@ def test_view_get_settings(m_auth, m_connect, m_address, m_l10n):
             'channels.core.socket_address': 'ADDRESS'})
 
 
-@patch("dj.channels.core.views.dumpjs")
+@patch("chango.core.views.dumpjs")
 @patch(
-    "dj.channels.core.views.ChannelView.js_prefix",
+    "chango.core.views.ChannelView.js_prefix",
     new_callable=PropertyMock)
-@patch("dj.channels.core.views.ChannelView.get_js")
+@patch("chango.core.views.ChannelView.get_js")
 def test_view_js_to_string(m_js, m_prefix, m_dump):
     view = ChannelView(data="DATA VIEW")
 
