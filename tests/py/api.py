@@ -3,8 +3,8 @@ from unittest.mock import patch
 
 import pytest
 
-from dj.channels.core.api import ChannelsAPI
-from dj.channels.core.exceptions import APIException
+from chango.core.api import ChannelsAPI
+from chango.core.exceptions import APIException
 
 
 def test_api_constructor():
@@ -16,8 +16,8 @@ def test_api_constructor():
             ("channels.auth.login", "api_login")))
 
 
-@patch("dj.channels.core.api.ChannelsAPI.api_logout")
-@patch("dj.channels.core.api.ChannelsAPI.api_login")
+@patch("chango.core.api.ChannelsAPI.api_logout")
+@patch("chango.core.api.ChannelsAPI.api_login")
 def test_api_call(m_login, m_logout):
     api = ChannelsAPI("CONSUMER")
     m_login.return_value = "LOGIN"
@@ -53,8 +53,8 @@ def test_api_call(m_login, m_logout):
     assert not m_login.called
 
 
-@patch("dj.channels.core.api.ChannelsAPI.authenticate")
-@patch("dj.channels.core.api.ChannelsAPI.login_user")
+@patch("chango.core.api.ChannelsAPI.authenticate")
+@patch("chango.core.api.ChannelsAPI.login_user")
 def test_api_login(m_login, m_auth):
     api = ChannelsAPI("CONSUMER")
     m_login.return_value = "LOGIN"
@@ -83,7 +83,7 @@ def test_api_login(m_login, m_auth):
     assert result == "LOGIN"
 
 
-@patch("dj.channels.core.api.authenticate")
+@patch("chango.core.api.authenticate")
 def test_api_authenticate(m_auth):
     api = ChannelsAPI("CONSUMER")
     m_auth.return_value = "AUTH"

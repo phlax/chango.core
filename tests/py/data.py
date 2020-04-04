@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from dj.channels.core.data import Data
+from chango.core.data import Data
 
 
 def test_consumer_data_constructor():

@@ -1,10 +1,10 @@
 
 from unittest.mock import patch
 
-from dj.channels.core.templates import ChannelsTemplateLoader
+from chango.core.templates import ChannelsTemplateLoader
 
 
-@patch("dj.channels.core.templates.Origin")
+@patch("chango.core.templates.Origin")
 def test_template_loader_sources(m_origin):
     loader = ChannelsTemplateLoader(None)
     m_origin.return_value = "ORIGIN"
@@ -23,8 +23,8 @@ def test_template_loader_sources(m_origin):
              'loader': loader}])
 
 
-@patch("dj.channels.core.templates.os")
-@patch("dj.channels.core.templates.open")
+@patch("chango.core.templates.os")
+@patch("chango.core.templates.open")
 def test_template_loader_get_contents(m_open, m_os, settings):
     loader = ChannelsTemplateLoader(None)
     settings.DJ_CHANNELS_ASSETS = "/SOME/PATH"

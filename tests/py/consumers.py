@@ -5,8 +5,8 @@ import pytest
 
 from django.urls import Resolver404
 
-from dj.channels.core.consumers import Consumer
-from dj.channels.core.exceptions import APIException
+from chango.core.consumers import Consumer
+from chango.core.exceptions import APIException
 
 
 class DummyConsumer(Consumer):
@@ -15,7 +15,7 @@ class DummyConsumer(Consumer):
         pass
 
 
-@patch("dj.channels.core.consumers.import_module")
+@patch("chango.core.consumers.import_module")
 def test_consumer_api(m_import, settings):
     m_import.return_value.ConsumerAPI.return_value = "API"
 
@@ -44,7 +44,7 @@ def test_consumer_api(m_import, settings):
         == [(consumer, ), {}])
 
 
-@patch("dj.channels.core.consumers.socket_connect")
+@patch("chango.core.consumers.socket_connect")
 def test_consumer_connect(m_connect):
     consumer = DummyConsumer()
     consumer.accept = MagicMock()
@@ -67,7 +67,7 @@ def test_consumer_connect(m_connect):
             {"session": consumer.scope.__getitem__.return_value}])
 
 
-@patch("dj.channels.core.consumers.socket_disconnect")
+@patch("chango.core.consumers.socket_disconnect")
 def test_consumer_disconnect(m_disconnect):
     consumer = DummyConsumer()
     consumer.scope = MagicMock()
@@ -87,7 +87,7 @@ def test_consumer_disconnect(m_disconnect):
              "session": consumer.scope.__getitem__.return_value}])
 
 
-@patch("dj.channels.core.consumers.json")
+@patch("chango.core.consumers.json")
 def test_consumer_load_data(m_json):
     consumer = DummyConsumer()
     m_json.loads.return_value = "JSON"
@@ -98,7 +98,7 @@ def test_consumer_load_data(m_json):
     assert result == "JSON"
 
 
-@patch("dj.channels.core.consumers.json")
+@patch("chango.core.consumers.json")
 def test_consumer_dump_data(m_json):
     consumer = DummyConsumer()
     m_json.dumps.return_value = "DATA"
@@ -155,7 +155,7 @@ def test_consumer_handle_route():
         == [("ROUTE",), {}])
 
 
-@patch("dj.channels.core.consumers.resolve")
+@patch("chango.core.consumers.resolve")
 def test_consumer_resolve(m_resolve):
     consumer = DummyConsumer()
     result = consumer.resolve("PATH")
@@ -172,11 +172,11 @@ def test_consumer_resolve(m_resolve):
         == [("data",), {}])
 
 
-@patch("dj.channels.core.consumers.Consumer.send")
-@patch("dj.channels.core.consumers.Consumer.dump_data")
-@patch("dj.channels.core.consumers.Consumer.handle_api")
-@patch("dj.channels.core.consumers.Consumer.handle_route")
-@patch("dj.channels.core.consumers.Consumer.log")
+@patch("chango.core.consumers.Consumer.send")
+@patch("chango.core.consumers.Consumer.dump_data")
+@patch("chango.core.consumers.Consumer.handle_api")
+@patch("chango.core.consumers.Consumer.handle_route")
+@patch("chango.core.consumers.Consumer.log")
 def test_consumer_handle(m_log, m_route, m_api, m_dump, m_send):
     consumer = DummyConsumer()
     m_dump.return_value = "DUMPED"
@@ -249,11 +249,11 @@ def test_consumer_handle(m_log, m_route, m_api, m_dump, m_send):
         == [(), {"text_data": "DUMPED"}])
 
 
-@patch("dj.channels.core.consumers.Consumer.dump_data")
-@patch("dj.channels.core.consumers.Consumer.send")
-@patch("dj.channels.core.consumers.Consumer.log_errors")
-@patch("dj.channels.core.consumers.Consumer.handle")
-@patch("dj.channels.core.consumers.Consumer.load_data")
+@patch("chango.core.consumers.Consumer.dump_data")
+@patch("chango.core.consumers.Consumer.send")
+@patch("chango.core.consumers.Consumer.log_errors")
+@patch("chango.core.consumers.Consumer.handle")
+@patch("chango.core.consumers.Consumer.load_data")
 def test_consumer_receive(m_load, m_handle, m_errors, m_send, m_dump):
     consumer = DummyConsumer()
     m_dump.return_value = "DUMPED DATA"

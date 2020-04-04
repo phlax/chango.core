@@ -4,9 +4,9 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.sessions import SessionMiddleware
 from channels.security.websocket import OriginValidator
 
-from dj.channels.core.asgi import application
-from dj.channels.core.routing import websocket_urlpatterns
-from dj.channels.core.consumers import Consumer
+from chango.core.asgi import application
+from chango.core.routing import websocket_urlpatterns
+from chango.core.consumers import Consumer
 
 
 def test_application(settings):
