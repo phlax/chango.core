@@ -19,6 +19,15 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
     help = 'Run webpack to create assets'
 
+    def add_arguments(self, parser):
+        super(AddCommand, self).add_arguments(parser)
+        parser.add_argument(
+            "--w",
+            "--watch",
+            action="store_true",
+            dest="watch",
+            help=("Run webpack in watch mode"))
+
     def handle(self, **options):
         index_path = os.path.abspath("public/index.html")
 
@@ -31,10 +40,12 @@ class Command(BaseCommand):
                     "../../../public/index.html"))
             shutil.copyfile(src_path, index_path)
 
-        command = (
-            "npm run watch -- -p /static/ -b %s"
-            % settings.DJ_CHANNELS_ASSETS)
-        command = (
-            "npm run watch -- -p /static/ -b %s"
-            % settings.DJ_CHANNELS_ASSETS)
+        if options.watch:
+            command = (
+                "npm run watch -- -p /static/ -b %s"
+                % settings.DJ_CHANNELS_ASSETS)
+        else:
+            command = (
+                "npm run watch -- -p /static/ -b %s"
+                % settings.DJ_CHANNELS_ASSETS)
         subprocess.call(command.split(" "))
