@@ -34,4 +34,7 @@ class Command(BaseCommand):
         command = (
             "npm run watch -- -p /static/ -b %s"
             % settings.DJ_CHANNELS_ASSETS)
+        command = (
+            "npm run watch -- -p /static/ -b %s"
+            % settings.DJ_CHANNELS_ASSETS)
         subprocess.call(command.split(" "))
