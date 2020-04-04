@@ -11,14 +11,14 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 
-import dj.channels.core.routing
+import chango.core.routing
 
 
 application = ProtocolTypeRouter({
     'websocket': AllowedHostsOriginValidator(
         AuthMiddlewareStack(
             URLRouter(
-                dj.channels.core.routing.websocket_urlpatterns
+                chango.core.routing.websocket_urlpatterns
             )
         )
     ),
