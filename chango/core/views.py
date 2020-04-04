@@ -98,4 +98,4 @@ class ChannelView(TemplateView):
             js += [
                 'window.%s.%s = JSON.parse("%s");'
                 % (self.js_prefix, k, dumpjs(v))]
-        return "\n".join(js)
+        return "<script>%s</script>" % ("\n".join(js))
