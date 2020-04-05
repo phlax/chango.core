@@ -40,7 +40,7 @@ class Command(BaseCommand):
                     "../../../public/index.html"))
             shutil.copyfile(src_path, index_path)
 
-        if options.watch:
+        if options["watch"]:
             command = (
                 "npm run watch -- -p /static/ -b %s"
                 % settings.DJ_CHANNELS_ASSETS)
