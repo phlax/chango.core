@@ -20,7 +20,7 @@ class Command(BaseCommand):
     help = 'Run webpack to create assets'
 
     def add_arguments(self, parser):
-        super(AddCommand, self).add_arguments(parser)
+        super(Command, self).add_arguments(parser)
         parser.add_argument(
             "--w",
             "--watch",
